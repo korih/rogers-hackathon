@@ -7,3 +7,4 @@ dependencies:
   - conda-forge::uvicorn
   - pip
   - pip:
+    - requests
