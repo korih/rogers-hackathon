@@ -39,7 +39,7 @@ class TestLocation(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         
         actual_response = response.json()
-        
+
         self.assertEqual(actual_response['status'], 200)
         self.assertEqual(actual_response['cell']['phoneNumber'], self.PHONE_NUMBER)
         
@@ -98,7 +98,7 @@ class TestLocation(unittest.TestCase):
                     "latitude": 49.261177,
                     "longitude": -123.249161
                 },
-                "accuracy": 50
+                "accuracy": 12000
             }
         }
         
@@ -110,9 +110,10 @@ class TestLocation(unittest.TestCase):
 
         self.assertEqual(actual_response['status'], 200)
         self.assertEqual(actual_response['message'], "location-verification request successful")
+        self.assertEqual(actual_response['verificationResult'], True, "Should pass")
 
 
-    def test_coordinate_accuracy(self): 
+    def test_coordinate_accuracy_latitude(self): 
         url = "https://pplx.azurewebsites.net/api/rapid/v0/location-verification/verify"
         
         headers = {
@@ -129,7 +130,7 @@ class TestLocation(unittest.TestCase):
             "area": {
                 "type": "Circle",
                 "location": {
-                    "latitude": 10,
+                    "latitude": 1,
                     "longitude": -123.249161
                 },
                 "accuracy": 50
@@ -144,6 +145,41 @@ class TestLocation(unittest.TestCase):
 
         self.assertEqual(actual_response['status'], 200)
         self.assertEqual(actual_response['message'], "location-verification request successful")
+        self.assertEqual(actual_response['verificationResult'], False, "Should be false")
+
+    def test_coordinate_accuracy_longitude(self): 
+        url = "https://pplx.azurewebsites.net/api/rapid/v0/location-verification/verify"
+        
+        headers = {
+            "Authorization": f"Bearer {self.ACCESS_TOKEN}",
+            "Cache-Control": "no-cache",
+            "accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        
+        data = {
+            "device": {
+                "phoneNumber": f"{self.PHONE_NUMBER}"
+            },
+            "area": {
+                "type": "Circle",
+                "location": {
+                    "latitude": 49.261177,
+                    "longitude": 123.249161
+                },
+                "accuracy": 50
+            }
+        }
+        
+        response = requests.post(url, headers=headers, json=data)
+
+        self.assertEqual(response.status_code, 200)
+        
+        actual_response = response.json()
+
+        self.assertEqual(actual_response['status'], 200)
+        self.assertEqual(actual_response['message'], "location-verification request successful")
+        self.assertEqual(actual_response['verificationResult'], False, "Should be false as this is incoorect")
 
 if __name__ == "__main__":
     unittest.main()
