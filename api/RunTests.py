@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 load_dotenv()
-from tests.TestSimSwap import TestSimSwap
+import unittest
+from tests.TestSimSwap import TestSimSwapAPI
 
 if __name__ == "__main__":
-    TestSimSwap()
+    unittest.main()
