@@ -1,0 +1,29 @@
+{
+  "status": 200,
+  "method": "POST",
+  "endpoint": "location-verification",
+  "api": "verify",
+  "accessToken": "Bearer xxxxx",
+  "phoneNumber": "14372197463",
+  "message": "location-verification request successful",
+  "datetime": "2024-10-05T18: 09: 25.554Z",
+  "cell": {
+    "phoneNumber": "00000000000",
+    "name": "team 2",
+    "message": "Hi",
+    "accessToken": "Bearer xxxxx"
+  },
+  "device": {
+    "phoneNumber": "00000000000"
+  },
+  "area": {
+    "type": "Circle",
+    "location": {
+      "latitude": 50.735851,
+      "longitude": 7.10066
+    },
+    "accuracy": 50
+  },
+  "verificationResult": false,
+  "lastLocationTime": "2024-10-05T18: 09: 25.554Z"
+}
