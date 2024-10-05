@@ -3,7 +3,7 @@ import requests
 import unittest
 from unittest.mock import patch
 
-class TestAPI(unittest.TestCase):
+class TestSimSwap(unittest.TestCase):
 	
 	def setUp(self):
 		self.base_url = "https://pplx.azurewebsites.net"
