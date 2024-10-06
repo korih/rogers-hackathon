@@ -19,12 +19,12 @@ export default function Login() {
 
   async function numberVerificationApi() {
     const header = {
-			"Authorization": `Bearer bca7ba`,
-			"Cache-Control": "no-cache",
-			"accept": "application/json",
-			"Content-Type": "application/json"
-		}
-    const body = {"phoneNumber" : `${phoneNumber}`};
+      "Authorization": `Bearer bca7ba`,
+      "Cache-Control": "no-cache",
+      "accept": "application/json",
+      "Content-Type": "application/json"
+    }
+    const body = { "phoneNumber": `${phoneNumber}` };
 
     const response = await axios.post(SIM_SWAP_URL, body, { headers: header })
     return response
@@ -51,30 +51,30 @@ export default function Login() {
   return (
     <main className="w-[100%] h-[100%] flex justify-center align-middle flex-col">
 
-      <div className=" mx-40 h-[700px]">
-      <section id="logo" className="flex justify-center align-middle mt-40 mb-40">
-        <div className="flex">
-          <img
-            src="Logo.png"
-            alt="logo"
-            className="w-64 h-64" />
-        </div>
-      </section>
+      <div className="h-[700px] bg-white m-64 rounded-xl">
+        <section id="logo" className="flex justify-center align-middle mt-40 mb-40">
+          <div className="flex">
+            <img
+              src="Logo.png"
+              alt="logo"
+              className="w-64 h-64" />
+          </div>
+        </section>
 
-      <section id="login" className="flex flex-col items-center">
-        <input
-          type="text"
-          name="phone-number"
-          value={phoneNumber || ''}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          className="w-[25vw]" />
-        <button
-          className="w-[25vw] bg-gray"
-          onClick={sendSimSwapRequest}>
-          Login
+        <section id="login" className="flex flex-col items-center">
+          <input
+            type="text"
+            name="phone-number"
+            value={phoneNumber || ''}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            className="w-[25vw] rounded-xl h-10" />
+          <button
+            className="w-[25vw] mt-2 mb-10 bg-gray"
+            onClick={sendSimSwapRequest}>
+            Login
 
-        </button>
-      </section>
+          </button>
+        </section>
       </div>
 
     </main>

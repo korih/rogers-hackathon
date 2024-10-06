@@ -4,6 +4,10 @@
   height: 100vh;
 }
 
+h1 {
+  color: black;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
