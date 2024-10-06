@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 import requests
 import json
 import time
@@ -108,11 +109,13 @@ def verify(phone_number):
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
 
     @app.route("/", methods=["GET"])
     def root():
         return "I am /backend"
 
+    # After scanning the QR code the phone will be lead here
     @app.route("/api/generate_qr/<phone_number>", methods=["GET"])
     def generate_qr(phone_number):
         for u in users_list:
@@ -121,7 +124,6 @@ def create_app(test_config=None):
                 return "https://rh.drismir.ca/api/phone_scan/"+phone_number
         return "failed"
 
-    # After scanning the QR code the phone will be lead here
     @app.route("/api/phone_scan/<phone_number>")
     def phone_scan(phone_number):
         if phone_number in active_qr_phone_numbers:
@@ -137,7 +139,7 @@ def create_app(test_config=None):
     def qr_scanned(phone_number):
         if phone_number in scanned_qr_phone_numbers:
             scanned_qr_phone_numbers.remove(phone_number)
-            return "done"
+            return "The QR code has been scanned"
         else:
             return "waiting"
 
