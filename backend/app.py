@@ -127,9 +127,9 @@ def create_app(test_config=None):
             active_qr_phone_numbers.remove(phone_number)
             scanned_qr_phone_numbers.add(phone_number)
             verify(phone_number)
-            return "done"
+            return "Phone Scan Complete!"
         else:
-            return "failed"
+            return "Invalid Phone Number"
 
     @app.route("/api/qr_scanned/<phone_number>")
     def qr_scanned(phone_number):
