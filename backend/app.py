@@ -132,7 +132,7 @@ def create_app(test_config=None):
             verify(phone_number)
             return "Phone Scan Complete!"
         else:
-            return "Invalid Phone Number"
+            return "failed"
 
     # The browser calls this to check if the phone number has been scanned
     @app.route("/api/qr_scanned/<phone_number>")
