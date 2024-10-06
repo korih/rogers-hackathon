@@ -118,7 +118,7 @@ def create_app(test_config=None):
         for u in users_list:
             if u["phone_number"] == phone_number:
                 active_qr_phone_numbers.add(phone_number)
-                return "http://localhost:5000/api/phone_scan/"+phone_number
+                return "https://rh.drismir.ca/api/phone_scan/"+phone_number
         return "failed"
 
     @app.route("/api/phone_scan/<phone_number>")
