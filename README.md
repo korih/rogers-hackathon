@@ -17,4 +17,4 @@ To run tests `python api/RunTests.py`
 Written in Flask, it will verify the phone number, generate a QR code for the phone which will let the phone send a request to the apis for the phone number and bearer token which will verify the computers request.
 
 ## Frontend
-The front end will call the backend server and be authenticated by the backend. This is a demonstration of the general user flow.
+Written with React, the front end will call the backend server and be authenticated by the backend. This is a demonstration of the general user flow.
