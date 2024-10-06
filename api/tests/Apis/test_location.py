@@ -42,6 +42,7 @@ class TestLocation(unittest.TestCase):
 
         self.assertEqual(actual_response['status'], 200)
         self.assertEqual(actual_response['cell']['phoneNumber'], self.PHONE_NUMBER)
+        self.assertEqual(actual_response['verificationResult'], False, "Should be false as both coordinates are incorrect")
         
 
     def test_basic_api_call_wrong_number(self): 
@@ -145,7 +146,7 @@ class TestLocation(unittest.TestCase):
 
         self.assertEqual(actual_response['status'], 200)
         self.assertEqual(actual_response['message'], "location-verification request successful")
-        self.assertEqual(actual_response['verificationResult'], False, "Should be false")
+        self.assertEqual(actual_response['verificationResult'], False, "Latitude Accuracy should fail")
 
     def test_coordinate_accuracy_longitude(self): 
         url = "https://pplx.azurewebsites.net/api/rapid/v0/location-verification/verify"
