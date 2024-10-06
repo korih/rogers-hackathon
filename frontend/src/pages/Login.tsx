@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const SIM_SWAP_URL: string = "https://pplx.azurewebsites.net/api/rapid/v0/simswap/check";
   const [phoneNumber, setPhoneNumber] = useState<string | null>('');
+  const navigate = useNavigate();
 
   async function sendSimSwapRequest(): Promise<void> {
+      navigate('/success')
     if (verifyPhoneNumber()) {
       console.log("phone number bad");
       return;
     }
+    let data = null;
     try {
       const response = await fetch(SIM_SWAP_URL, {
         method: 'POST',
@@ -18,10 +22,15 @@ export default function Login() {
         body: JSON.stringify({ phoneNumber }),
       });
 
-      const data = await response.json();
+      data = await response.json();
       console.log(data);
     } catch (error) {
       console.error(error);
+      return;
+    }
+
+    if (data === null) {
+      navigate('/success')
     }
   }
 
