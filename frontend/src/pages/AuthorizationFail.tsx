@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AuthorizationFail() {
 
@@ -84,7 +84,12 @@ export default function AuthorizationFail() {
     await LocationVerificationApi();
   }
 
-  fetchAll()
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      fetchAll()
+    }, 2000)
+    return () => clearTimeout(timeout);
+  })
 
 
   return (

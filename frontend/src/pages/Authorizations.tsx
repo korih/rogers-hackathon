@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Authorizations() {
@@ -94,7 +94,12 @@ export default function Authorizations() {
     navigate("/authfail")
   }
 
-  fetchAll()
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      fetchAll()
+    }, 2000)
+    return () => clearTimeout(timeout);
+  })
 
 
   return (
@@ -140,7 +145,7 @@ export default function Authorizations() {
 
         </button>
       </div>
-      </div>
+    </div>
 
-      );
+  );
 }
