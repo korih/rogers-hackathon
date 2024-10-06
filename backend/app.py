@@ -109,7 +109,7 @@ def verify(phone_number):
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
     @app.route("/", methods=["GET"])
     def root():
