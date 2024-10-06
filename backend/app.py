@@ -109,6 +109,10 @@ def verify(phone_number):
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
 
+    @app.route("/", methods=["GET"])
+    def root():
+        return "I am /backend"
+
     @app.route("/api/generate_qr/<phone_number>", methods=["GET"])
     def generate_qr(phone_number):
         for u in users_list:
@@ -161,3 +165,5 @@ def create_app(test_config=None):
         return "failed"
 
     return app
+
+app = create_app()
