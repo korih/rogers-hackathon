@@ -1,0 +1,7 @@
+services:
+  flaskapp:
+    build: .
+    ports:
+      - "8001:8001"
+    platform: linux/amd64
+    restart: always
