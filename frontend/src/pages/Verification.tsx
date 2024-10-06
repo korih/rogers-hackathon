@@ -1,9 +1,10 @@
+import axios from "axios";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Verification() {
-  const URL = "http://localhost:5000/api/phone_scan/";
+  const URL = "https://rh.drismir.ca/api/phone_scan/14372197463";
   const [qr, setQr] = useState<string>("");
   const navigate = useNavigate();
 
@@ -24,25 +25,23 @@ export default function Verification() {
   }
 
   async function checkVerified() {
-    const response = await fetch(URL, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-
-    const response_text = await response.text();
+    let response = null;
+    try {
+    response = await axios.get("https://rh.drismir.ca/api/phone_scan/14372197463")
+    } catch(error) {
+    }
+    const response_text = await response?.data;
 
     if (response_text === "asdf") {
-      navigate("/authentications")
+      navigate("/auth")
     }
   }
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = await getUrl();
-      setQr(url);
-      setQr("www.gooogle.com"); // TODO: remove later
+     // const url = await getUrl();
+      //setQr(url);
+      setQr("rh.drismir.ca/api/phone_scan/"); // TODO: remove later
     };
     fetchData();
   }, []);
@@ -50,10 +49,17 @@ export default function Verification() {
 
   useEffect(() => {
     const interval = setInterval( async () => {
-      checkVerified();
+      await checkVerified();
     }, 1000)
     return () => clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate('/auth');
+    }, 4000)
+    return () => clearTimeout(timeout);
+  })
 
 
   return (

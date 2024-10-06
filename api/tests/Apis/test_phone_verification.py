@@ -34,6 +34,7 @@ class TestNumberVerification(unittest.TestCase):
 		self.assertEqual(actual_response["status"], 200)
 
 		self.assertEqual(actual_response['cell']['phoneNumber'], os.getenv('PHONE_NUMBER'))
+		print(actual_response)
 
 
 if __name__ == "__main__":

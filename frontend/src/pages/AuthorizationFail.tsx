@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default function Authorizations() {
+export default function AuthorizationFail() {
 
   const PHONE_NUMER_URL: string = "https://pplx.azurewebsites.net/api/rapid/v0/numberVerification/verify";
   const LOCATION_URL: string = "https://pplx.azurewebsites.net/api/rapid/v0/location-verification/verify";
@@ -24,9 +24,9 @@ export default function Authorizations() {
 
     if (response.status !== 200) {
       setPhone(2)
-    }
-
+    } else {
       setPhone(1)
+    }
     return response
   }
 
@@ -39,23 +39,25 @@ export default function Authorizations() {
     }
     const body = {
             "device": {
-                "phoneNumber": "14372197463"
+                "phoneNumber": "14372197422"
             },
             "area": {
                 "type": "Circle",
                 "location": {
-                    "latitude": 50.735851,
-                    "longitude": 7.10066
-                },
-                "accuracy": 50
+                    "latitude": 5,
+                    "longitude": 12
+        },
+                "accuracy": 0
             }
         };
 
     const response = await axios.post(LOCATION_URL, body, { headers: header })
-    if (response.status !== 200) {
+    console.log(response.data.status);
+    if (response.data.status !== 200) {
       setLocation(2)
-    }
+    } else {
       setLocation(1)
+    }
     return response
   }
 
@@ -71,8 +73,9 @@ export default function Authorizations() {
     const response = await axios.post(SIM_SWAP_URL, body, { headers: header })
     if (response.status !== 200) {
       setSim(2)
-    }
+    } else {
       setSim(1)
+    }
     return response
   }
 
@@ -123,3 +126,4 @@ export default function Authorizations() {
 
   );
 }
+
