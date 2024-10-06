@@ -121,6 +121,7 @@ def create_app(test_config=None):
                 return "https://rh.drismir.ca/api/phone_scan/"+phone_number
         return "failed"
 
+    # After scanning the QR code the phone will be lead here
     @app.route("/api/phone_scan/<phone_number>")
     def phone_scan(phone_number):
         if phone_number in active_qr_phone_numbers:
@@ -131,6 +132,7 @@ def create_app(test_config=None):
         else:
             return "Invalid Phone Number"
 
+    # The browser calls this to check if the phone number has been scanned
     @app.route("/api/qr_scanned/<phone_number>")
     def qr_scanned(phone_number):
         if phone_number in scanned_qr_phone_numbers:
